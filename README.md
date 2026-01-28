@@ -39,4 +39,4 @@ I specialize in building scalable microservices and AI-driven applications. Curr
 * **Hardware Hacking:** Tinkering with signal analysis and Bluetooth pentesting using the Flipper Zero.
 * **Creative:** Fan of "Doodle Overlay" art style and digital sketching.
 
-📫 **How to reach me:** [Your LinkedIn Link] | [Your Portfolio Link]
+📫 **How to reach me:** [https://www.linkedin.com/in/manasmahajan99/] 
