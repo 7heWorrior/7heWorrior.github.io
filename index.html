@@ -11,16 +11,82 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9); /* slate-50 to slate-100 */
-            color: #334155; /* slate-700 */
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
+        
+        /* Animated gradient orbs */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            top: -200px;
+            right: -200px;
+            animation: float1 20s ease-in-out infinite;
+        }
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            bottom: -150px;
+            left: -150px;
+            animation: float2 25s ease-in-out infinite;
+        }
+        .bg-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #10b981, #14b8a6);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float3 18s ease-in-out infinite;
+        }
+        
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, 80px) scale(1.1); }
+            66% { transform: translate(30px, -40px) scale(0.9); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -50px) scale(1.05); }
+            66% { transform: translate(-40px, 60px) scale(0.95); }
+        }
+        @keyframes float3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-40%, -60%) scale(1.1); }
+        }
+        
+        /* Grid pattern overlay */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
         .nav-link {
             transition: color 0.3s, border-bottom-color 0.3s;
             border-bottom: 2px solid transparent;
         }
         .nav-link:hover, .nav-link.active {
-            color: #f59e0b; /* amber-500 */
-            border-bottom-color: #f59e0b;
+            color: #fbbf24;
+            border-bottom-color: #fbbf24;
         }
         .section-fade-in {
             opacity: 0;
@@ -31,6 +97,22 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Glass cards */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Updated text colors for dark theme */
+        .text-slate-800 { color: #f1f5f9 !important; }
+        .text-slate-700 { color: #e2e8f0 !important; }
+        .text-slate-600 { color: #cbd5e1 !important; }
+        .text-slate-500 { color: #94a3b8 !important; }
+        .bg-white { background: rgba(30, 41, 59, 0.7) !important; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .bg-slate-100\/70 { background: rgba(15, 23, 42, 0.5) !important; }
+        .bg-white\/80 { background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     </style>
 </head>
 <body class="antialiased">
