@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,28 +12,37 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9); /* slate-50 to slate-100 */
-            color: #334155; /* slate-700 */
+            background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+            /* slate-50 to slate-100 */
+            color: #334155;
+            /* slate-700 */
         }
+
         .nav-link {
             transition: color 0.3s, border-bottom-color 0.3s;
             border-bottom: 2px solid transparent;
         }
-        .nav-link:hover, .nav-link.active {
-            color: #f59e0b; /* amber-500 */
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #f59e0b;
+            /* amber-500 */
             border-bottom-color: #f59e0b;
         }
+
         .section-fade-in {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         .section-fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
+
 <body class="antialiased">
 
     <!-- Header & Navigation -->
@@ -50,7 +60,11 @@
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-slate-800 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
                 </button>
             </div>
         </nav>
@@ -70,9 +84,11 @@
         <section id="hero" class="text-center py-20 md:py-32">
             <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-4">Hi, I'm Manas.</h1>
             <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-600 mb-8">
-                A Full-Stack Developer passionate about building robust, scalable, and user-centric web applications from concept to deployment.
+                A Full-Stack Developer passionate about building robust, scalable, and user-centric web applications
+                from concept to deployment.
             </p>
-            <a href="#work" class="bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-colors duration-300">
+            <a href="#work"
+                class="bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-colors duration-300">
                 View My Work
             </a>
         </section>
@@ -82,7 +98,12 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">About Me</h2>
             <div class="max-w-4xl mx-auto text-center">
                 <p class="text-lg text-slate-600 leading-relaxed">
-                    I'm a software developer with over three years of experience specializing in full-stack development. My journey in tech has been driven by a passion for problem-solving and a desire to build things that are both efficient and elegant. I thrive in collaborative environments, working on large-scale microservice architectures and ensuring applications are not only technically sound but also meet critical compliance standards like SOX. When I'm not coding, I enjoy exploring the latest in AI and machine learning, constantly seeking new ways to integrate intelligent solutions into my work.
+                    I'm a software developer with over three years of experience specializing in full-stack development.
+                    My journey in tech has been driven by a passion for problem-solving and a desire to build things
+                    that are both efficient and elegant. I thrive in collaborative environments, working on large-scale
+                    microservice architectures and ensuring applications are not only technically sound but also meet
+                    critical compliance standards like SOX. When I'm not coding, I enjoy exploring the latest in AI and
+                    machine learning, constantly seeking new ways to integrate intelligent solutions into my work.
                 </p>
             </div>
         </section>
@@ -90,49 +111,89 @@
         <!-- Work Section -->
         <section id="work" class="py-16 md:py-24 bg-slate-100/70 rounded-xl section-fade-in">
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">My Work</h2>
-             <p class="max-w-3xl mx-auto text-center mb-12 text-slate-600">
-                Here are some of the projects I'm proud to have worked on. Each project presented a unique set of challenges, from architecting scalable backends to creating intuitive user interfaces. This section provides a glimpse into my technical capabilities and my approach to solving real-world problems.
+            <p class="max-w-3xl mx-auto text-center mb-12 text-slate-600">
+                Here are some of the projects I'm proud to have worked on. Each project presented a unique set of
+                challenges, from architecting scalable backends to creating intuitive user interfaces. This section
+                provides a glimpse into my technical capabilities and my approach to solving real-world problems.
             </p>
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-slate-800">HireMate - AI Resume Scorer</h3>
-                        <p class="text-slate-600 mb-4">An AI-driven tool to score and rank resumes, developed during the Snowvation Hackathon. It leverages Snowflake Cortex for AI/ML capabilities.</p>
+                        <p class="text-slate-600 mb-4">An AI-driven tool to score and rank resumes, developed during the
+                            Snowvation Hackathon. It leverages Snowflake Cortex for AI/ML capabilities.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Snowflake Cortex</span>
+                            <span
+                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Snowflake
+                                Cortex</span>
                         </div>
                         <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
                     </div>
                 </div>
                 <!-- Project 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-slate-800">Financial Workflow Automation</h3>
-                        <p class="text-slate-600 mb-4">A large-scale, SOX-compliant system to automate global financial reporting and workflows, built on a microservice architecture.</p>
+                        <p class="text-slate-600 mb-4">A large-scale, SOX-compliant system to automate global financial
+                            reporting and workflows, built on a microservice architecture.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Spring Boot</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
-                             <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AWS</span>
+                            <span
+                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Spring
+                                Boot</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AWS</span>
                         </div>
                         <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
                     </div>
                 </div>
                 <!-- Project 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-slate-800">Cloud Testing Framework</h3>
-                        <p class="text-slate-600 mb-4">An automated testing pipeline for large-scale cloud services, which increased testing efficiency by 5x through automation.</p>
+                        <p class="text-slate-600 mb-4">An automated testing pipeline for large-scale cloud services,
+                            which increased testing efficiency by 5x through automation.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Pytest</span>
-                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Jenkins</span>
-                             <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CI/CD</span>
+                            <span
+                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Pytest</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Jenkins</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CI/CD</span>
                         </div>
                         <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
+                    </div>
+                </div>
+                <!-- Project 4: Java DSA Guide -->
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-slate-800">Java Mastery Guide</h3>
+                        <p class="text-slate-600 mb-4">A comprehensive, interactive reference guide for Java Data
+                            Structures, Algorithms, and the Stream API. Built for developers and interview prep.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">HTML5</span>
+                            <span
+                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Tailwind
+                                CSS</span>
+                        </div>
+                        <a href="Jc.html" class="font-medium text-amber-600 hover:text-amber-800">View Guide &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -145,7 +206,7 @@
                 <!-- Skills will be injected by JS -->
             </div>
         </section>
-        
+
         <!-- Experience Section -->
         <section id="experience" class="py-16 md:py-24 section-fade-in">
             <h2 class="text-3xl font-bold text-center mb-16 text-slate-800">Work Experience</h2>
@@ -153,22 +214,26 @@
                 <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
                 <!-- Experience Item -->
                 <div class="relative mb-8">
-                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white"></div>
+                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white">
+                    </div>
                     <div class="ml-8 bg-white p-6 rounded-lg shadow-md">
                         <p class="text-amber-600 font-semibold">June 2021 - Present</p>
                         <h3 class="text-xl font-bold mt-1 text-slate-800">Software Developer (Full Stack)</h3>
                         <p class="text-slate-500 font-medium mb-2">Snowflake Inc.</p>
-                        <p class="text-slate-600">Led projects, developed SOX-compliant microservices with Java/Spring, built frontends with React, and enhanced system scalability on AWS.</p>
+                        <p class="text-slate-600">Led projects, developed SOX-compliant microservices with Java/Spring,
+                            built frontends with React, and enhanced system scalability on AWS.</p>
                     </div>
                 </div>
                 <!-- Experience Item -->
                 <div class="relative">
-                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white"></div>
+                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white">
+                    </div>
                     <div class="ml-8 bg-white p-6 rounded-lg shadow-md">
                         <p class="text-amber-600 font-semibold">Jan 2021 - June 2021</p>
                         <h3 class="text-xl font-bold mt-1 text-slate-800">Software Engineer QA Intern</h3>
                         <p class="text-slate-500 font-medium mb-2">Snowflake Inc.</p>
-                        <p class="text-slate-600">Automated key testing workflows for cloud services, increasing test efficiency by 5x and contributing to CI/CD pipeline integration.</p>
+                        <p class="text-slate-600">Automated key testing workflows for cloud services, increasing test
+                            efficiency by 5x and contributing to CI/CD pipeline integration.</p>
                     </div>
                 </div>
             </div>
@@ -180,14 +245,18 @@
     <footer id="contact" class="bg-gradient-to-b from-slate-800 to-slate-900 text-slate-300 py-20">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-4 text-white">Let's Connect</h2>
-            <p class="mb-8 text-lg max-w-xl mx-auto">I'm currently open to new opportunities. If you have a project in mind or just want to say hello, feel free to reach out.</p>
-            <a href="mailto:manas.mahajan99@gmail.com" class="inline-block bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-colors duration-300 mb-8">
+            <p class="mb-8 text-lg max-w-xl mx-auto">I'm currently open to new opportunities. If you have a project in
+                mind or just want to say hello, feel free to reach out.</p>
+            <a href="mailto:manas.mahajan99@gmail.com"
+                class="inline-block bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-colors duration-300 mb-8">
                 Say Hello
             </a>
             <div class="flex justify-center items-center space-x-6 text-lg">
-                <a href="https://www.linkedin.com/in/manasmahajan99/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/manasmahajan99/" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-amber-400 transition-colors">LinkedIn</a>
                 <span>&bull;</span>
-                <a href="https://github.com/7heWorrior" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors">GitHub</a>
+                <a href="https://github.com/7heWorrior" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-amber-400 transition-colors">GitHub</a>
             </div>
         </div>
     </footer>
@@ -255,7 +324,7 @@
             }, { threshold: 0.1 });
 
             fadeElements.forEach(el => fadeObserver.observe(el));
-            
+
             // Close mobile menu on link click
             document.querySelectorAll('#mobile-menu a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -265,4 +334,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java DSA & Streams • Developer Reference</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        glass: "rgba(30, 41, 59, 0.7)",
+                        glassBorder: "rgba(255, 255, 255, 0.08)",
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(99, 102, 241, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #020617;
+            /* slate-950 */
+            background-image:
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #e2e8f0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .code-window {
+            background: #0d1117;
+            border: 1px solid #30363d;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-sans selection:bg-indigo-500/30 grid-bg">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Hero Section -->
+        <header class="mb-12 text-center relative">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4 animate-fade-in-up">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                v6.3 Updated
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-white">
+                Java <span class="gradient-text">Mastery</span> Guide
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                The ultimate reference for DSA patterns, Stream API recipes, and algorithmic complexity.
+            </p>
+        </header>
+
+        <!-- Masonry Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-min">
+
+            <!-- 1. Core Data Structures -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-indigo-500/30 transition-all duration-300 hover:shadow-glow group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-xl group-hover:bg-blue-500/20 transition-colors">
+                        📦</div>
+                    <h2 class="text-xl font-bold text-slate-100">Core Structures</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- ArrayList -->
+                    <div class="group/item">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-semibold text-blue-400">ArrayList</span>
+                            <span
+                                class="text-[10px] uppercase font-bold text-slate-500 tracking-wider bg-slate-800/50 px-2 py-0.5 rounded">Random
+                                Access</span>
+                        </div>
+                        <div
+                            class="code-window rounded-lg p-3 text-sm font-mono text-slate-300 shadow-inner group-hover/item:border-blue-500/30 transition-colors">
+                            <span class="text-pink-400">List</span>&lt;T&gt; l = <span class="text-pink-400">new</span>
+                            <span class="text-yellow-300">ArrayList</span>&lt;&gt;();<br>
+                            l.add(v); l.get(i); <span class="text-slate-500 italic">// O(1) read</span>
+                        </div>
+                    </div>
+
+                    <!-- ArrayDeque -->
+                    <div class="group/item">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-semibold text-indigo-400">ArrayDeque</span>
+                            <span
+                                class="text-[10px] uppercase font-bold text-slate-500 tracking-wider bg-slate-800/50 px-2 py-0.5 rounded">Stack
+                                / Queue</span>
+                        </div>
+                        <div
+                            class="code-window rounded-lg p-3 text-sm font-mono text-slate-300 shadow-inner group-hover/item:border-indigo-500/30 transition-colors">
+                            <span class="text-pink-400">Deque</span>&lt;T&gt; d = <span class="text-pink-400">new</span>
+                            <span class="text-yellow-300">ArrayDeque</span>&lt;&gt;();<br>
+                            d.push(v); d.pop(); <span class="text-slate-500 italic">// LIFO</span><br>
+                            d.offer(v); d.poll(); <span class="text-slate-500 italic">// FIFO</span>
+                        </div>
+                    </div>
+
+                    <!-- HashMap -->
+                    <div class="group/item">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-semibold text-emerald-400">HashMap</span>
+                            <span
+                                class="text-[10px] uppercase font-bold text-slate-500 tracking-wider bg-slate-800/50 px-2 py-0.5 rounded">Key-Value</span>
+                        </div>
+                        <div
+                            class="code-window rounded-lg p-3 text-sm font-mono text-slate-300 shadow-inner group-hover/item:border-emerald-500/30 transition-colors">
+                            m.putIfAbsent(k, v);<br>
+                            m.getOrDefault(k, <span class="text-blue-300">0</span>);<br>
+                            m.computeIfAbsent(k, x -> ...);
+                        </div>
+                    </div>
+
+                    <!-- PriorityQueue -->
+                    <div class="group/item">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-semibold text-purple-400">PriorityQueue</span>
+                            <span
+                                class="text-[10px] uppercase font-bold text-slate-500 tracking-wider bg-slate-800/50 px-2 py-0.5 rounded">Min/Max
+                                Heap</span>
+                        </div>
+                        <div
+                            class="code-window rounded-lg p-3 text-sm font-mono text-slate-300 shadow-inner group-hover/item:border-purple-500/30 transition-colors">
+                            <span class="text-pink-400">PQ</span>&lt;T&gt; q = <span class="text-pink-400">new</span>
+                            <span class="text-yellow-300">PQ</span>&lt;&gt;((a,b)->b-a);<br>
+                            q.offer(v); q.poll(); <span class="text-slate-500 italic">// O(log n)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Streams API -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-sky-500/30 transition-all duration-300 hover:shadow-glow group md:row-span-2">
+                <div class="flex items-center justify-between mb-5">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center text-xl group-hover:bg-sky-500/20 transition-colors">
+                            ⚡</div>
+                        <h2 class="text-xl font-bold text-slate-100">Streams API</h2>
+                    </div>
+                    <span
+                        class="px-2 py-1 rounded bg-sky-500/10 text-sky-400 text-xs font-mono font-bold border border-sky-500/20">Java
+                        8+</span>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Intermediate (Lazy)
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-sky-300 font-mono text-sm bg-sky-500/10 px-1.5 py-0.5 rounded">.filter(x -> boolean)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-sky-300 font-mono text-sm bg-sky-500/10 px-1.5 py-0.5 rounded">.map(x -> y)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-sky-300 font-mono text-sm bg-sky-500/10 px-1.5 py-0.5 rounded">.flatMap(x -> stream)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-sky-300 font-mono text-sm bg-sky-500/10 px-1.5 py-0.5 rounded">.sorted((a,b) -> int)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-sky-300 font-mono text-sm bg-sky-500/10 px-1.5 py-0.5 rounded">.distinct()</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-px bg-slate-700/50"></div>
+
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Terminal (Eager)
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-pink-300 font-mono text-sm bg-pink-500/10 px-1.5 py-0.5 rounded">.collect(Collectors...)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-pink-300 font-mono text-sm bg-pink-500/10 px-1.5 py-0.5 rounded">.reduce(acc, (a,b)->res)</code>
+                            </div>
+                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
+                                <code
+                                    class="text-pink-300 font-mono text-sm bg-pink-500/10 px-1.5 py-0.5 rounded">.anyMatch / .allMatch</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="code-window rounded-lg p-3 text-sm font-mono text-slate-300 shadow-xl border-sky-500/20 border">
+                        <div class="flex gap-1.5 mb-2">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                        </div>
+                        <span class="text-slate-500">// Example: Top k freq elements</span><br>
+                        list.stream()<br>
+                        &nbsp;&nbsp;.collect(groupingBy(x->x, counting()))<br>
+                        &nbsp;&nbsp;.entrySet().stream()<br>
+                        &nbsp;&nbsp;.sorted(Map.Entry.comparingByValue().reversed())<br>
+                        &nbsp;&nbsp;.limit(k)<br>
+                        &nbsp;&nbsp;.map(Map.Entry::getKey)<br>
+                        &nbsp;&nbsp;.collect(toList());
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. LeetCode Toolkit -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-indigo-500/30 transition-all duration-300 hover:shadow-glow group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-xl group-hover:bg-indigo-500/20 transition-colors">
+                        🛠️</div>
+                    <h2 class="text-xl font-bold text-slate-100">Toolkit</h2>
+                </div>
+
+                <div class="grid grid-cols-1 gap-2">
+                    <div
+                        class="p-3 bg-slate-800/40 rounded-lg border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">String Power</span>
+                        <div class="text-sm font-mono text-slate-300 space-x-2">
+                            <span class="bg-indigo-500/10 rounded px-1">.toCharArray()</span>
+                            <span class="bg-indigo-500/10 rounded px-1">.substring(s,e)</span>
+                            <span class="bg-indigo-500/10 rounded px-1">.indexOf(c)</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-3 bg-slate-800/40 rounded-lg border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">Arrays Util</span>
+                        <div class="text-sm font-mono text-slate-300 space-x-2">
+                            <span class="bg-indigo-500/10 rounded px-1">Arrays.sort(a)</span>
+                            <span class="bg-indigo-500/10 rounded px-1">.fill(v)</span>
+                            <span class="bg-indigo-500/10 rounded px-1">.copyOf(a, n)</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-3 bg-slate-800/40 rounded-lg border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <span class="text-xs font-bold text-indigo-400 block mb-1">Math Magic</span>
+                        <div class="text-sm font-mono text-slate-300 space-x-2">
+                            <span class="bg-indigo-500/10 rounded px-1">.abs()</span>
+                            <span class="bg-indigo-500/10 rounded px-1">.max(a,b)</span>
+                            <span class="bg-indigo-500/10 rounded px-1">Character.isLetter()</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Time Complexity -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-red-500/30 transition-all duration-300 hover:shadow-glow group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center text-xl group-hover:bg-red-500/20 transition-colors">
+                        ⏳</div>
+                    <h2 class="text-xl font-bold text-slate-100">Big O</h2>
+                </div>
+
+                <div class="overflow-hidden rounded-lg border border-slate-700/50">
+                    <table class="w-full text-sm text-center">
+                        <thead>
+                            <tr class="bg-slate-800/80 text-xs text-slate-400">
+                                <th class="p-2 font-medium text-left">Struct</th>
+                                <th class="p-2 font-medium">Access</th>
+                                <th class="p-2 font-medium">Search</th>
+                                <th class="p-2 font-medium">Ins/Del</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+                                <td class="p-2 text-left font-semibold text-slate-300">Array</td>
+                                <td class="text-green-400 font-mono">1</td>
+                                <td class="text-red-400 font-mono">N</td>
+                                <td class="text-red-400 font-mono">N</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+                                <td class="p-2 text-left font-semibold text-slate-300">Stack</td>
+                                <td class="text-red-400 font-mono">N</td>
+                                <td class="text-red-400 font-mono">N</td>
+                                <td class="text-green-400 font-mono">1</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+                                <td class="p-2 text-left font-semibold text-slate-300">HashMap</td>
+                                <td class="text-gray-500 font-mono">-</td>
+                                <td class="text-green-400 font-mono">1</td>
+                                <td class="text-green-400 font-mono">1</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+                                <td class="p-2 text-left font-semibold text-slate-300">BST</td>
+                                <td class="text-yellow-400 font-mono">logN</td>
+                                <td class="text-yellow-400 font-mono">logN</td>
+                                <td class="text-yellow-400 font-mono">logN</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+                                <td class="p-2 text-left font-semibold text-slate-300">Heap</td>
+                                <td class="text-green-400 font-mono">1*</td>
+                                <td class="text-red-400 font-mono">N</td>
+                                <td class="text-yellow-400 font-mono">logN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-[10px] text-slate-500 mt-2 text-right">* Min/Max element access</p>
+            </section>
+
+            <!-- 5. Interview Recipes -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-emerald-500/30 transition-all duration-300 hover:shadow-glow group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-xl group-hover:bg-emerald-500/20 transition-colors">
+                        ⚔️</div>
+                    <h2 class="text-xl font-bold text-slate-100">Recipes</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-xs font-bold text-emerald-400 mb-1">Frequency Map</p>
+                        <div
+                            class="code-window rounded p-2 text-xs font-mono text-emerald-100/90 border-l-2 border-emerald-500">
+                            map.put(c, map.getOrDefault(c, 0) + 1);
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-emerald-400 mb-1">Custom Sort Comparator</p>
+                        <div
+                            class="code-window rounded p-2 text-xs font-mono text-emerald-100/90 border-l-2 border-emerald-500">
+                            list.sort((a,b) -> m.get(a) - m.get(b));
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-emerald-400 mb-1">Graph: Adjacency List</p>
+                        <div
+                            class="code-window rounded p-2 text-xs font-mono text-emerald-100/90 border-l-2 border-emerald-500">
+                            Map&lt;Integer, List&lt;Integer&gt;&gt; graph = new HashMap&lt;&gt;();<br>
+                            graph.computeIfAbsent(u, k -> new ArrayList&lt;&gt;()).add(v);
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Boilerplate -->
+            <section
+                class="glass-card rounded-2xl p-6 hover:border-amber-500/30 transition-all duration-300 hover:shadow-glow group">
+                <div class="flex items-center gap-3 mb-5">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-xl group-hover:bg-amber-500/20 transition-colors">
+                        🧬</div>
+                    <h2 class="text-xl font-bold text-slate-100">Boilerplate</h2>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="relative">
+                        <span class="absolute top-2 right-2 text-[10px] text-slate-500 font-mono">TreeNode</span>
+                        <pre class="code-window p-3 rounded-lg text-xs leading-relaxed text-slate-300 font-mono">
+<span class="text-pink-400">public class</span> <span class="text-yellow-300">TreeNode</span> {
+    <span class="text-pink-400">int</span> val;
+    TreeNode left, right;
+    TreeNode(<span class="text-pink-400">int</span> x) { val = x; }
+}</pre>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute top-2 right-2 text-[10px] text-slate-500 font-mono">ListNode</span>
+                        <pre class="code-window p-3 rounded-lg text-xs leading-relaxed text-slate-300 font-mono">
+<span class="text-pink-400">public class</span> <span class="text-yellow-300">ListNode</span> {
+    <span class="text-pink-400">int</span> val;
+    ListNode next;
+    ListNode(<span class="text-pink-400">int</span> x) { val = x; }
+}</pre>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="mt-16 border-t border-slate-800 pt-8 text-center">
+            <p class="text-slate-500 text-sm">
+                Crafted with <span class="text-indigo-500">Tailwind</span> & <span class="text-pink-500">Passion</span>
+                • v6.3 Web Edition
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2 font-medium z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+        </svg>
+        Copied to clipboard!
+    </div>
+
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('.code-window').forEach(block => {
+            block.style.cursor = 'pointer';
+            block.setAttribute('title', 'Click to copy');
+
+            block.addEventListener('click', async () => {
+                const text = block.innerText;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast();
+
+                    // Visual feedback on block
+                    const originalBorder = block.style.borderColor;
+                    block.style.borderColor = '#10b981'; // emerald-500
+                    block.classList.add('ring-2', 'ring-emerald-500/50');
+
+                    setTimeout(() => {
+                        block.style.borderColor = originalBorder;
+                        block.classList.remove('ring-2', 'ring-emerald-500/50');
+                    }, 500);
+
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                }
+            });
+        });
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>
