@@ -5,45 +5,257 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manas Mahajan - Full-Stack Software Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
-            /* slate-50 to slate-100 */
-            color: #334155;
-            /* slate-700 */
+            background: linear-gradient(145deg, #0a0a0f 0%, #12121a 50%, #0d0d14 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-
+        
+        /* Liquid glass background */
+        .liquid-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        /* Organic liquid blobs */
+        .liquid-blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+        }
+        
+        /* Safari fix: reduce blend mode issues */
+        @supports (-webkit-touch-callout: none) {
+            .liquid-blob {
+                opacity: 0.15;
+            }
+        }
+        
+        .blob-1 {
+            width: 800px;
+            height: 800px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.6) 0%, rgba(139, 92, 246, 0.4) 50%, rgba(236, 72, 153, 0.3) 100%);
+            top: -300px;
+            right: -200px;
+            animation: morph1 25s ease-in-out infinite, drift1 30s ease-in-out infinite;
+        }
+        
+        .blob-2 {
+            width: 700px;
+            height: 700px;
+            background: linear-gradient(180deg, rgba(6, 182, 212, 0.5) 0%, rgba(59, 130, 246, 0.4) 50%, rgba(99, 102, 241, 0.3) 100%);
+            bottom: -250px;
+            left: -200px;
+            animation: morph2 20s ease-in-out infinite, drift2 28s ease-in-out infinite;
+        }
+        
+        .blob-3 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.4) 0%, rgba(245, 158, 11, 0.3) 50%, rgba(239, 68, 68, 0.2) 100%);
+            top: 40%;
+            left: 60%;
+            animation: morph3 22s ease-in-out infinite, drift3 26s ease-in-out infinite;
+        }
+        
+        .blob-4 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.4) 0%, rgba(6, 182, 212, 0.3) 100%);
+            top: 60%;
+            left: 10%;
+            animation: morph1 18s ease-in-out infinite reverse, drift1 24s ease-in-out infinite reverse;
+        }
+        
+        /* Morphing animations */
+        @keyframes morph1 {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            25% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 60% 30% 60% / 70% 40% 50% 40%; }
+            75% { border-radius: 60% 40% 60% 40% / 50% 60% 30% 60%; }
+        }
+        
+        @keyframes morph2 {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            33% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            66% { border-radius: 70% 40% 50% 50% / 40% 50% 60% 50%; }
+        }
+        
+        @keyframes morph3 {
+            0%, 100% { border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; }
+            50% { border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%; }
+        }
+        
+        /* Drifting animations */
+        @keyframes drift1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-30px, 50px) rotate(5deg); }
+            50% { transform: translate(20px, -30px) rotate(-3deg); }
+            75% { transform: translate(-40px, -20px) rotate(3deg); }
+        }
+        
+        @keyframes drift2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(40px, -40px) rotate(-5deg); }
+            66% { transform: translate(-30px, 30px) rotate(4deg); }
+        }
+        
+        @keyframes drift3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, 40px) scale(1.1); }
+        }
+        
+        /* Glass noise texture overlay */
+        .glass-noise {
+            position: fixed;
+            inset: 0;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        
+        /* Dark overlay for iOS Safari compatibility */
+        .dark-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(10, 10, 15, 0.85) 0%, rgba(18, 18, 26, 0.8) 50%, rgba(13, 13, 20, 0.85) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Frosted glass cards */
+        .glass-card, .bg-white {
+            background: rgba(255, 255, 255, 0.03) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .bg-white:hover {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        /* Header glass */
+        .bg-white\/80 { 
+            background: rgba(10, 10, 15, 0.7) !important; 
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Section backgrounds */
+        .bg-slate-100\/70 { 
+            background: rgba(255, 255, 255, 0.02) !important;
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
         .nav-link {
-            transition: color 0.3s, border-bottom-color 0.3s;
+            transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
         }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: #f59e0b;
-            /* amber-500 */
-            border-bottom-color: #f59e0b;
+        .nav-link:hover, .nav-link.active {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+            text-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
         }
-
+        
         .section-fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         .section-fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Text colors for dark theme - with text shadows for readability */
+        .text-slate-800 { color: #f1f5f9 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .text-slate-700 { color: #e2e8f0 !important; }
+        .text-slate-600 { color: #cbd5e1 !important; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+        .text-slate-500 { color: #94a3b8 !important; }
+        
+        /* Accent button glow */
+        .bg-amber-500 {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%) !important;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .bg-amber-500:hover {
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%) !important;
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Skills tags */
+        .bg-amber-100 {
+            background: rgba(139, 92, 246, 0.2) !important;
+            color: #c4b5fd !important;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        .bg-slate-200 {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #cbd5e1 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Timeline accent */
+        .bg-amber-500.rounded-full {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%) !important;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        /* Link colors */
+        .text-amber-600 { color: #a78bfa !important; }
+        .text-amber-600:hover, .hover\:text-amber-800:hover { color: #c4b5fd !important; }
+        .hover\:text-amber-400:hover { color: #c4b5fd !important; }
+        
+        /* Footer gradient */
+        footer {
+            background: linear-gradient(180deg, rgba(10, 10, 15, 0) 0%, rgba(10, 10, 15, 0.9) 100%) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 
 <body class="antialiased">
+
+    <!-- Liquid Glass Background -->
+    <div class="liquid-bg">
+        <div class="liquid-blob blob-1"></div>
+        <div class="liquid-blob blob-2"></div>
+        <div class="liquid-blob blob-3"></div>
+        <div class="liquid-blob blob-4"></div>
+    </div>
+    <div class="dark-overlay"></div>
+    <div class="glass-noise"></div>
 
     <!-- Header & Navigation -->
     <header id="header" class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
@@ -56,6 +268,7 @@
                 <a href="#work" class="nav-link font-medium">Work</a>
                 <a href="#skills" class="nav-link font-medium">Skills</a>
                 <a href="#experience" class="nav-link font-medium">Experience</a>
+                <a href="#education" class="nav-link font-medium">Education</a>
                 <a href="#contact" class="nav-link font-medium">Contact</a>
             </div>
             <div class="md:hidden">
@@ -74,6 +287,7 @@
             <a href="#work" class="block py-2 text-center nav-link font-medium">Work</a>
             <a href="#skills" class="block py-2 text-center nav-link font-medium">Skills</a>
             <a href="#experience" class="block py-2 text-center nav-link font-medium">Experience</a>
+            <a href="#education" class="block py-2 text-center nav-link font-medium">Education</a>
             <a href="#contact" class="block py-2 text-center nav-link font-medium">Contact</a>
         </div>
     </header>
@@ -82,10 +296,10 @@
 
         <!-- Hero Section -->
         <section id="hero" class="text-center py-20 md:py-32">
+            <p class="text-sm md:text-base text-slate-500 mb-4 tracking-wide">📍 Pune, India</p>
             <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-4">Hi, I'm Manas.</h1>
             <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-600 mb-8">
-                A Full-Stack Developer passionate about building robust, scalable, and user-centric web applications
-                from concept to deployment.
+                Full-Stack Developer with 3+ years of experience building scalable, distributed systems and automated financial workflows. Expert in Java, Python, and SQL with a focus on microservices architecture.
             </p>
             <a href="#work"
                 class="bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-colors duration-300">
@@ -98,12 +312,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">About Me</h2>
             <div class="max-w-4xl mx-auto text-center">
                 <p class="text-lg text-slate-600 leading-relaxed">
-                    I'm a software developer with over three years of experience specializing in full-stack development.
-                    My journey in tech has been driven by a passion for problem-solving and a desire to build things
-                    that are both efficient and elegant. I thrive in collaborative environments, working on large-scale
-                    microservice architectures and ensuring applications are not only technically sound but also meet
-                    critical compliance standards like SOX. When I'm not coding, I enjoy exploring the latest in AI and
-                    machine learning, constantly seeking new ways to integrate intelligent solutions into my work.
+                    Full-Stack Developer with 3+ years of experience building scalable, distributed systems and automated financial workflows at Snowflake. Proven track record of collaborating with Data Science, Product, and Finance teams to deliver high-impact, data-driven solutions. Expert in Java, Python, and SQL, with a focus on microservices architecture and end-to-end production ownership. Bringing an experimental mindset and a commitment to monitoring SLIs/SLOs to drive business impact in fast-paced engineering environments.
                 </p>
             </div>
         </section>
@@ -121,60 +330,42 @@
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
+                        <p class="text-xs text-slate-500 mb-2">🏆 Snowvation Hackathon Winner — Sept 2024</p>
                         <h3 class="text-xl font-bold mb-2 text-slate-800">HireMate - AI Resume Scorer</h3>
-                        <p class="text-slate-600 mb-4">An AI-driven tool to score and rank resumes, developed during the
-                            Snowvation Hackathon. It leverages Snowflake Cortex for AI/ML capabilities.</p>
+                        <p class="text-slate-600 mb-4">An AI tool using Snowflake Cortex to score resumes against job descriptions, streamlining recruitment with an iterate-fast mentality.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Snowflake
-                                Cortex</span>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Snowflake Cortex</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">GenAI/LLM</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
                         </div>
-                        <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
                     </div>
                 </div>
                 <!-- Project 2 -->
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-slate-800">Financial Workflow Automation</h3>
-                        <p class="text-slate-600 mb-4">A large-scale, SOX-compliant system to automate global financial
-                            reporting and workflows, built on a microservice architecture.</p>
+                        <h3 class="text-xl font-bold mb-2 text-slate-800">Massive-Scale Backend Services</h3>
+                        <p class="text-slate-600 mb-4">Low-latency backend services using Java Spring Boot, designed for reliability and global scale. Integrated GenAI capabilities into internal tools.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Spring
-                                Boot</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AWS</span>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Spring Boot</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Microservices</span>
+                             <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AWS</span>
                         </div>
-                        <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
                     </div>
                 </div>
                 <!-- Project 3 -->
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-slate-800">Cloud Testing Framework</h3>
-                        <p class="text-slate-600 mb-4">An automated testing pipeline for large-scale cloud services,
-                            which increased testing efficiency by 5x through automation.</p>
+                        <h3 class="text-xl font-bold mb-2 text-slate-800">Automated Financial Workflows</h3>
+                        <p class="text-slate-600 mb-4">End-to-end ownership of services for global financial data consumption. Championed AI tools that reduced manual operational hours by 40%.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Pytest</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Jenkins</span>
-                            <span
-                                class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CI/CD</span>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">ArgoCD</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Datadog</span>
+                            <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">SLIs/SLOs</span>
+                             <span class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Kubernetes</span>
                         </div>
-                        <a href="#" class="font-medium text-amber-600 hover:text-amber-800">View Details &rarr;</a>
                     </div>
                 </div>
                 <!-- Project 4: Java DSA Guide -->
@@ -210,31 +401,35 @@
         <!-- Experience Section -->
         <section id="experience" class="py-16 md:py-24 section-fade-in">
             <h2 class="text-3xl font-bold text-center mb-16 text-slate-800">Work Experience</h2>
-            <div class="max-w-2xl mx-auto relative">
-                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
+            <div class="max-w-3xl mx-auto relative">
+                <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-slate-700"></div>
                 <!-- Experience Item -->
-                <div class="relative mb-8">
-                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white">
-                    </div>
-                    <div class="ml-8 bg-white p-6 rounded-lg shadow-md">
+                <div class="relative mb-12">
+                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 left-2 md:left-1/2 md:-translate-x-1/2 border-4 border-slate-900"></div>
+                    <div class="ml-12 md:ml-0 md:w-5/12 md:pr-8 bg-white p-6 rounded-lg shadow-md">
                         <p class="text-amber-600 font-semibold">June 2021 - Present</p>
-                        <h3 class="text-xl font-bold mt-1 text-slate-800">Software Developer (Full Stack)</h3>
-                        <p class="text-slate-500 font-medium mb-2">Snowflake Inc.</p>
-                        <p class="text-slate-600">Led projects, developed SOX-compliant microservices with Java/Spring,
-                            built frontends with React, and enhanced system scalability on AWS.</p>
+                        <h3 class="text-xl font-bold mt-1 text-slate-800">Software Developer - Fullstack</h3>
+                        <p class="text-slate-500 font-medium mb-3">Snowflake Inc.</p>
+                        <ul class="text-slate-600 text-sm space-y-2">
+                            <li>• Design and operate low-latency backend services using Java Spring Boot for global data consumption</li>
+                            <li>• Integrated GenAI and LLM capabilities into internal tools — won Snowvation Hackathon</li>
+                            <li>• Partner with cross-functional teams to design APIs and complex data flows</li>
+                            <li>• Championed AI tools, reducing manual operational hours by 40%</li>
+                            <li>• Full end-to-end ownership: design, deployment via ArgoCD, production monitoring with Datadog</li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Experience Item -->
-                <div class="relative">
-                    <div class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 -left-1.5 border-4 border-white">
-                    </div>
-                    <div class="ml-8 bg-white p-6 rounded-lg shadow-md">
-                        <p class="text-amber-600 font-semibold">Jan 2021 - June 2021</p>
-                        <h3 class="text-xl font-bold mt-1 text-slate-800">Software Engineer QA Intern</h3>
-                        <p class="text-slate-500 font-medium mb-2">Snowflake Inc.</p>
-                        <p class="text-slate-600">Automated key testing workflows for cloud services, increasing test
-                            efficiency by 5x and contributing to CI/CD pipeline integration.</p>
-                    </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-16 md:py-24 bg-slate-100/70 rounded-xl section-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">Education</h2>
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-slate-800">B.Tech in Computer Engineering</h3>
+                    <p class="text-slate-500 font-medium mt-1">Vishwakarma Institute of Technology</p>
+                    <p class="text-amber-600 font-semibold mt-2">CGPA: 8.51</p>
                 </div>
             </div>
         </section>
@@ -272,12 +467,11 @@
 
             // Dynamic Skills Grid
             const skillsData = {
-                "Languages": ["Java", "Python", "JavaScript", "TypeScript", "SQL"],
-                "Backend": ["Spring Boot", "RESTful APIs", "Microservices", "OOP Design"],
-                "Frontend": ["React", "Next.js", "HTML5", "CSS3", "Tailwind CSS"],
-                "Cloud & DevOps": ["AWS", "Docker", "Kubernetes", "Jenkins", "CI/CD"],
-                "Databases": ["Snowflake", "MongoDB", "Relational Databases"],
-                "Compliance & Tools": ["SOX Compliance", "JIRA", "Git", "Pytest"]
+                "Languages": ["Java", "Python", "SQL", "JavaScript", "Kotlin/Scala"],
+                "Frameworks": ["Spring Boot", "React", "Next.js", "Redux", "Streamlit"],
+                "Cloud & Infra": ["Kubernetes (K8s)", "Docker", "AWS (Lambda, EKS, ECR)", "Snowpark"],
+                "DevOps & Tools": ["Jenkins", "ArgoCD", "Datadog", "Snyk", "Opensearch"],
+                "Concepts": ["REST APIs", "Microservices", "A/B Testing", "CI/CD", "Agile", "Webhooks"]
             };
 
             const skillsContainer = document.getElementById('skills-grid');
