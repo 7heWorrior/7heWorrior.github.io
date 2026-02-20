@@ -1,109 +1,720 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manas Mahajan - Full-Stack Software Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                    },
-                    colors: {
-                        glass: "rgba(30, 41, 59, 0.7)",
-                        glassBorder: "rgba(255, 255, 255, 0.08)",
-                    },
-                    boxShadow: {
-                        'glow': '0 0 20px rgba(99, 102, 241, 0.15)',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Manas Mahajan - Full-Stack Developer</title>
+    <meta name="description" content="Full-Stack Developer with 3+ years building scalable systems at Snowflake. Java, Python, microservices, and more.">
+
+    <!-- Google Fonts: Hand-drawn feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- Rough.js for hand-drawn SVG borders -->
+    <script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+
     <style>
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            --paper: #faf6ef;
+            --paper-dark: #f0e9d8;
+            --ink: #1a1209;
+            --ink-light: #3d3020;
+            --pencil: #6b5c45;
+            --pencil-light: #9e8b72;
+            --marker-yellow: #ffd60a;
+            --marker-blue: #0096c7;
+            --marker-red: #e63946;
+            --marker-green: #52b788;
+            --marker-purple: #7b2d8b;
+            --tape: rgba(255, 214, 10, 0.55);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: #020617;
-            /* slate-950 */
+            font-family: 'Patrick Hand', cursive;
+            background-color: var(--paper);
             background-image:
-                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: #e2e8f0;
+                /* Horizontal ruled lines */
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 27px,
+                    rgba(170, 150, 120, 0.18) 27px,
+                    rgba(170, 150, 120, 0.18) 28px
+                ),
+                /* Left margin line */
+                linear-gradient(90deg, transparent 58px, rgba(220, 100, 80, 0.15) 58px, rgba(220, 100, 80, 0.15) 60px, transparent 60px),
+                /* Paper texture noise */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            color: var(--ink);
+            min-height: 100vh;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--paper-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--pencil-light); border-radius: 4px; }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3 { font-family: 'Caveat', cursive; }
+
+        .marker-title {
+            font-family: 'Permanent Marker', cursive;
+            letter-spacing: 0.02em;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
+        /* ===== SQUIGGLY UNDERLINE ===== */
+        .squiggle {
+            display: inline;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 3 Q5 0 10 3 Q15 6 20 3' fill='none' stroke='%23e63946' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-position: 0 100%;
+            background-size: 20px 6px;
+            padding-bottom: 6px;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+        .highlight-yellow {
+            background: linear-gradient(180deg, transparent 55%, rgba(255, 214, 10, 0.55) 55%);
+            padding: 0 2px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+        .highlight-blue {
+            background: linear-gradient(180deg, transparent 55%, rgba(0, 150, 199, 0.3) 55%);
+            padding: 0 2px;
         }
 
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-        }
-
-        .nav-link {
-            transition: all 0.3s ease;
+        /* ===== NAVIGATION ===== */
+        #header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--paper);
             border-bottom: 2px solid transparent;
+            padding: 0;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: #6366f1;
-            border-bottom-color: #6366f1;
+        #header::after {
+            content: '';
+            display: block;
+            height: 3px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 6'%3E%3Cpath d='M0 3 Q10 1 20 3 Q30 5 40 3 Q50 1 60 3 Q70 5 80 3 Q90 1 100 3 Q110 5 120 3 Q130 1 140 3 Q150 5 160 3 Q170 1 180 3 Q190 5 200 3' fill='none' stroke='%231a1209' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 200px 6px;
         }
 
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .nav-logo::after {
+            content: '✏️';
+            font-size: 1rem;
+            margin-left: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--ink-light);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--marker-red);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--marker-red);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        #mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: var(--ink);
+        }
+
+        #mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: var(--paper);
+            padding: 12px 24px 16px;
+            gap: 8px;
+            border-top: 1px dashed var(--pencil-light);
+        }
+
+        #mobile-menu a {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink-light);
+            text-decoration: none;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--paper-dark);
+        }
+
+        #mobile-menu.open { display: flex; }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        section { padding: 80px 0; }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-title {
+            font-family: 'Caveat', cursive;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 16px;
+            display: block;
+            text-align: center;
+        }
+
+        .section-title-wrap {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .doodle-underline {
+            display: block;
+            margin: 6px auto 0;
+            width: 120px;
+            height: 12px;
+        }
+
+        /* ===== SKETCH CARD ===== */
+        .sketch-card {
+            position: relative;
+            background: #fffdf7;
+            padding: 36px;
+            margin-bottom: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .sketch-card:hover {
+            transform: translateY(-3px) rotate(0.2deg);
+        }
+
+        /* Canvas overlay for rough borders — sits BEHIND content */
+        .rough-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sketch-card > *:not(canvas),
+        .project-card > *:not(canvas),
+        .edu-card > *:not(canvas) {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HERO SECTION ===== */
+        #hero {
+            text-align: center;
+            padding: 100px 0 80px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--marker-purple);
+            background: rgba(123, 45, 139, 0.1);
+            border: 1.5px dashed var(--marker-purple);
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .hero-location {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            color: var(--pencil);
+            margin-bottom: 20px;
+        }
+
+        h1.hero-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(3.2rem, 8vw, 6rem);
+            color: var(--ink);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        h1.hero-name .name-accent {
+            color: var(--marker-red);
+            position: relative;
+        }
+
+        .hero-desc {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.35rem;
+            color: var(--pencil);
+            max-width: 720px;
+            margin: 0 auto 40px;
+            line-height: 1.75;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-sketch {
+            display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 14px 40px;
+            position: relative;
+            transition: transform 0.15s ease;
+        }
+
+        .btn-sketch:hover {
+            transform: scale(1.04) rotate(-0.5deg);
+        }
+
+        .btn-sketch canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        .btn-sketch.primary { color: var(--ink); }
+
+        /* ===== DOODLE DECORATIONS ===== */
+        .doodle-star {
+            position: absolute;
+            font-size: 1.4rem;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(8deg); }
+        }
+
+        .doodle-arrow {
+            position: absolute;
+            color: var(--pencil);
+            font-size: 1.8rem;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        #about .about-text {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: var(--ink-light);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* ===== WORK / PROJECTS ===== */
+        #work .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            position: relative;
+            background: #fffdf7;
+            padding: 34px 30px;
+            transition: transform 0.25s ease;
+        }
+
+        .project-card:nth-child(1) { transform: rotate(-0.8deg); }
+        .project-card:nth-child(2) { transform: rotate(0.5deg); }
+        .project-card:nth-child(3) { transform: rotate(-0.4deg); }
+        .project-card:nth-child(4) { transform: rotate(0.7deg); }
+
+        .project-card:hover {
+            transform: rotate(0deg) translateY(-4px) scale(1.01) !important;
+            z-index: 2;
+        }
+
+        /* tape strip on top */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 60px; height: 20px;
+            background: var(--tape);
+            border-radius: 2px;
+            z-index: 3;
+        }
+
+        .project-card:nth-child(2)::before { transform: translateX(-50%) rotate(2deg); }
+        .project-card:nth-child(3)::before { transform: translateX(-50%) rotate(-1deg); }
+        .project-card:nth-child(4)::before { transform: translateX(-50%) rotate(3deg); }
+
+        .project-hackathon-badge {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--marker-red);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .project-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .project-desc {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            color: var(--pencil);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+        .tag {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 4px 13px;
+            border-radius: 4px;
+            border: 1.5px solid;
+        }
+
+        .tag.accent { color: var(--marker-red); border-color: var(--marker-red); background: rgba(230, 57, 70, 0.08); }
+        .tag.secondary { color: var(--ink-light); border-color: var(--pencil-light); background: rgba(106, 90, 69, 0.07); }
+
+        .project-link {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--marker-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .project-link:hover { gap: 10px; }
+
+        /* ===== SKILLS ===== */
+        #skills-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            margin-bottom: 36px;
+        }
+
+        .skill-category-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.35rem;
+            color: var(--marker-blue);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, var(--pencil-light) 0, var(--pencil-light) 6px, transparent 6px, transparent 12px);
+        }
+
+        .skills-flex { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        .skill-pill {
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink-light);
+            padding: 8px 20px;
+            background: var(--paper);
+            border: none;
+            position: relative;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        .skill-pill canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        /* ===== EXPERIENCE (Timeline) ===== */
+        #experience .timeline {
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #experience .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0; bottom: 0;
+            width: 3px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--pencil-light) 0px,
+                var(--pencil-light) 8px,
+                transparent 8px,
+                transparent 14px
+            );
+        }
+
+        .timeline-item {
+            padding-left: 56px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 10px; top: 6px;
+            width: 22px; height: 22px;
+            background: var(--marker-yellow);
+            border: 3px solid var(--ink);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--marker-red);
+            margin-bottom: 8px;
+        }
+
+        .timeline-role {
+            font-family: 'Caveat', cursive;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.15rem;
+            color: var(--pencil);
+            margin-bottom: 18px;
+        }
+
+        .timeline-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timeline-list li {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .timeline-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--marker-green);
+            font-size: 0.9rem;
+        }
+
+        /* ===== EDUCATION ===== */
+        #education .edu-card {
+            max-width: 580px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            background: #fffdf7;
+            padding: 48px 44px;
+        }
+
+        .edu-degree {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .edu-school {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.25rem;
+            color: var(--pencil);
+            margin-bottom: 16px;
+        }
+
+        .edu-cgpa {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.7rem;
+            color: var(--marker-green);
+        }
+
+        /* ===== CONTACT / FOOTER ===== */
+        #contact {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 96px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 6'%3E%3Cpath d='M0 3 Q10 1 20 3 Q30 5 40 3 Q50 1 60 3 Q70 5 80 3 Q90 1 100 3 Q110 5 120 3 Q130 1 140 3 Q150 5 160 3 Q170 1 180 3 Q190 5 200 3' fill='none' stroke='%23faf6ef' stroke-width='2.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 200px 6px;
+        }
+
+        #contact h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3.4rem;
+            margin-bottom: 16px;
+            color: var(--marker-yellow);
+        }
+
+        #contact p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            color: rgba(250, 246, 239, 0.75);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.75;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--paper);
+            text-decoration: none;
+            border-bottom: 2px dashed rgba(250, 246, 239, 0.4);
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .contact-links a:hover {
+            color: var(--marker-yellow);
+            border-color: var(--marker-yellow);
+        }
+
+        .contact-links span { color: rgba(250, 246, 239, 0.3); }
+
+        .footer-copyright {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 0.85rem;
+            color: rgba(250, 246, 239, 0.35);
+            margin-top: 36px;
+        }
+
+        /* ===== FADE-IN ===== */
         .section-fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .section-fade-in.visible {
@@ -111,321 +722,421 @@
             transform: translateY(0);
         }
 
-        /* Override slate text colors for compatibility */
-        .text-slate-800 {
-            color: #f8fafc !important;
-        }
-
-        .text-slate-700 {
-            color: #f1f5f9 !important;
-        }
-
-        .text-slate-600 {
-            color: #cbd5e1 !important;
-        }
-
-        .text-slate-500 {
-            color: #94a3b8 !important;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            #mobile-menu-button { display: block; }
+            #hero { padding: 48px 0 40px; }
+            h1.hero-name { font-size: 2.6rem; }
+            #work .projects-grid { grid-template-columns: 1fr; }
+            .project-card { transform: none !important; }
+            .project-card::before { display: none; }
         }
     </style>
 </head>
 
-<body class="antialiased selection:bg-indigo-500/30 grid-bg">
+<body>
 
-    <!-- Header & Navigation -->
-    <header id="header"
-        class="glass-card sticky top-0 z-50 !bg-slate-950/70 !backdrop-blur-xl border-b border-white/10">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold gradient-text">
-                Manas Mahajan
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link font-medium">About</a>
-                <a href="#work" class="nav-link font-medium">Work</a>
-                <a href="#skills" class="nav-link font-medium">Skills</a>
-                <a href="#experience" class="nav-link font-medium">Experience</a>
-                <a href="#education" class="nav-link font-medium">Education</a>
-                <a href="#contact" class="nav-link font-medium">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <nav>
+            <a href="#hero" class="nav-logo">Manas Mahajan</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="mobile-menu-button" aria-label="Open menu">☰</button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 glass-card !border-t-0 !rounded-none">
-            <a href="#about" class="block py-2 text-center nav-link font-medium">About</a>
-            <a href="#work" class="block py-2 text-center nav-link font-medium">Work</a>
-            <a href="#skills" class="block py-2 text-center nav-link font-medium">Skills</a>
-            <a href="#experience" class="block py-2 text-center nav-link font-medium">Experience</a>
-            <a href="#education" class="block py-2 text-center nav-link font-medium">Education</a>
-            <a href="#contact" class="block py-2 text-center nav-link font-medium">Contact</a>
+        <div id="mobile-menu">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-6">
+    <main>
 
-        <!-- Hero Section -->
-        <section id="hero" class="text-center py-20 md:py-32 relative">
-            <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-                v2026 Portfolio
+        <!-- ===== HERO ===== -->
+        <section id="hero" class="container">
+            <!-- Floating doodles -->
+            <span class="doodle-star" style="top:30px;left:8%;animation-delay:0s;">⭐</span>
+            <span class="doodle-star" style="top:60px;right:10%;animation-delay:1.2s;font-size:1.8rem;">✦</span>
+            <span class="doodle-star" style="bottom:40px;left:15%;animation-delay:0.7s;font-size:1.1rem;">🌟</span>
+            <span class="doodle-star" style="bottom:20px;right:18%;animation-delay:2s;font-size:1rem;">✶</span>
+
+            <div class="hero-badge">
+                <span>✏️</span> v2026 Portfolio
             </div>
-            <p class="text-sm md:text-base text-slate-500 mb-4 tracking-wide">📍 Pune, India</p>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">
-                Hi, I'm <span class="gradient-text">Manas</span>.
+
+            <p class="hero-location">📍 Pune, India</p>
+
+            <h1 class="hero-name">
+                Hi, I'm <span class="name-accent squiggle">Manas</span>.
             </h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-600 mb-8">
-                Full-Stack Developer with 3+ years of experience building scalable, distributed systems and automated
-                financial workflows. Expert in Java, Python, and SQL with a focus on microservices architecture.
+
+            <p class="hero-desc">
+                Full-Stack Developer with <span class="highlight-yellow">3+ years</span> of experience
+                building scalable, distributed systems and automated financial workflows.
+                Expert in <span class="highlight-blue">Java, Python, and SQL</span> with a focus on microservices.
             </p>
-            <a href="#work"
-                class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-glow">
-                View My Work
+
+            <a href="#work" class="btn-sketch primary" id="hero-cta">
+                <canvas id="btn-cta-canvas"></canvas>
+                View My Work ✍️
             </a>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-16 md:py-24 section-fade-in">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">About Me</h2>
-            <div class="max-w-4xl mx-auto text-center">
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    Full-Stack Developer with 3+ years of experience building scalable, distributed systems and
-                    automated financial workflows at Snowflake. Proven track record of collaborating with Data Science,
-                    Product, and Finance teams to deliver high-impact, data-driven solutions. Expert in Java, Python,
-                    and SQL, with a focus on microservices architecture and end-to-end production ownership. Bringing an
-                    experimental mindset and a commitment to monitoring SLIs/SLOs to drive business impact in fast-paced
-                    engineering environments.
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="section-fade-in">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-title">About Me</span>
+                    <svg class="doodle-underline" viewBox="0 0 120 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6 Q15 2 30 7 Q45 12 60 6 Q75 0 90 6 Q105 12 118 6" fill="none" stroke="#e63946" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="sketch-card" id="about-card">
+                    <canvas class="rough-canvas" id="about-canvas"></canvas>
+                    <p class="about-text">
+                        Full-Stack Developer with <strong>3+ years</strong> of experience building scalable, distributed systems
+                        and automated financial workflows at <span class="highlight-yellow">Snowflake</span>. Proven track record
+                        of collaborating with Data Science, Product, and Finance teams to deliver high-impact, data-driven
+                        solutions. Expert in Java, Python, and SQL, with a focus on microservices architecture and
+                        end-to-end production ownership. Bringing an experimental mindset and a commitment to
+                        monitoring SLIs/SLOs to drive business impact in fast-paced engineering environments.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WORK ===== -->
+        <section id="work" class="section-fade-in">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-title">My Work</span>
+                    <svg class="doodle-underline" viewBox="0 0 120 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6 Q15 2 30 7 Q45 12 60 6 Q75 0 90 6 Q105 12 118 6" fill="none" stroke="#0096c7" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <p style="font-family:'Patrick Hand',cursive;text-align:center;color:var(--pencil);max-width:620px;margin:0 auto 48px;line-height:1.7;">
+                    Here are some of the projects I'm proud to have worked on. Each presented a unique challenge —
+                    from architecting scalable backends to creating intuitive user interfaces.
                 </p>
-            </div>
-        </section>
-
-        <!-- Work Section -->
-        <section id="work" class="py-16 md:py-24 section-fade-in">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">My Work</h2>
-            <p class="max-w-3xl mx-auto text-center mb-12 text-slate-600">
-                Here are some of the projects I'm proud to have worked on. Each project presented a unique set of
-                challenges, from architecting scalable backends to creating intuitive user interfaces. This section
-                provides a glimpse into my technical capabilities and my approach to solving real-world problems.
-            </p>
-            <div class="max-w-5xl mx-auto grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <p class="text-xs text-slate-500 mb-2">🏆 Snowvation Hackathon Winner — Sept 2024</p>
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">HireMate - AI Resume Scorer</h3>
-                    <p class="text-slate-600 mb-4">An AI tool using Snowflake Cortex to score resumes against job
-                        descriptions, streamlining recruitment with an iterate-fast mentality.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Snowflake
-                            Cortex</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">GenAI/LLM</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">React</span>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card" id="proj-1">
+                        <canvas class="rough-canvas" id="proj-1-canvas"></canvas>
+                        <span class="project-hackathon-badge">🏆 Snowvation Hackathon Winner — Sept 2024</span>
+                        <h3 class="project-title">HireMate - AI Resume Scorer</h3>
+                        <p class="project-desc">An AI tool using Snowflake Cortex to score resumes against job descriptions, streamlining recruitment with an iterate-fast mentality.</p>
+                        <div class="tag-list">
+                            <span class="tag accent">Snowflake Cortex</span>
+                            <span class="tag secondary">GenAI/LLM</span>
+                            <span class="tag secondary">React</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">Massive-Scale Backend Services</h3>
-                    <p class="text-slate-600 mb-4">Low-latency backend services using Java Spring Boot, designed for
-                        reliability and global scale. Integrated GenAI capabilities into internal tools.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Spring
-                            Boot</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Microservices</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">AWS</span>
+                    <!-- Project 2 -->
+                    <div class="project-card" id="proj-2">
+                        <canvas class="rough-canvas" id="proj-2-canvas"></canvas>
+                        <h3 class="project-title">Massive-Scale Backend Services</h3>
+                        <p class="project-desc">Low-latency backend services using Java Spring Boot, designed for reliability and global scale. Integrated GenAI capabilities into internal tools.</p>
+                        <div class="tag-list">
+                            <span class="tag accent">Java</span>
+                            <span class="tag secondary">Spring Boot</span>
+                            <span class="tag secondary">Microservices</span>
+                            <span class="tag secondary">AWS</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">Automated Financial Workflows</h3>
-                    <p class="text-slate-600 mb-4">End-to-end ownership of services for global financial data
-                        consumption.
-                        Championed AI tools that reduced manual operational hours by 40%.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">ArgoCD</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Datadog</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">SLIs/SLOs</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Kubernetes</span>
+                    <!-- Project 3 -->
+                    <div class="project-card" id="proj-3">
+                        <canvas class="rough-canvas" id="proj-3-canvas"></canvas>
+                        <h3 class="project-title">Automated Financial Workflows</h3>
+                        <p class="project-desc">End-to-end ownership of services for global financial data consumption. Championed AI tools that reduced manual operational hours by 40%.</p>
+                        <div class="tag-list">
+                            <span class="tag accent">ArgoCD</span>
+                            <span class="tag secondary">Datadog</span>
+                            <span class="tag secondary">SLIs/SLOs</span>
+                            <span class="tag secondary">Kubernetes</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 4: Java DSA Guide -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-xl font-bold mb-2 text-slate-800">Java Mastery Guide</h3>
-                    <p class="text-slate-600 mb-4">A comprehensive, interactive reference guide for Java Data
-                        Structures, Algorithms, and the Stream API. Built for developers and interview prep.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                            class="bg-amber-100 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Java</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">HTML5</span>
-                        <span
-                            class="bg-slate-200 text-slate-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Tailwind
-                            CSS</span>
-                    </div>
-                    <a href="Jc.html" class="font-medium text-amber-600 hover:text-amber-800">View Guide &rarr;</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 md:py-24 section-fade-in">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">My Technical Skills</h2>
-            <div id="skills-grid" class="max-w-5xl mx-auto">
-                <!-- Skills will be injected by JS -->
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-16 md:py-24 section-fade-in">
-            <h2 class="text-3xl font-bold text-center mb-16 text-slate-800">Work Experience</h2>
-            <div class="max-w-3xl mx-auto relative">
-                <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-slate-700"></div>
-                <!-- Experience Item -->
-                <div class="relative mb-12">
-                    <div
-                        class="absolute w-4 h-4 bg-amber-500 rounded-full mt-1.5 left-2 md:left-1/2 md:-translate-x-1/2 border-4 border-slate-900">
-                    </div>
-                    <div class="ml-12 md:ml-0 md:w-5/12 md:pr-8 glass-card p-6 rounded-2xl">
-                        <p class="text-amber-600 font-semibold">June 2021 - Present</p>
-                        <h3 class="text-xl font-bold mt-1 text-slate-800">Software Developer - Fullstack</h3>
-                        <p class="text-slate-500 font-medium mb-3">Snowflake Inc.</p>
-                        <ul class="text-slate-600 text-sm space-y-2">
-                            <li>• Design and operate low-latency backend services using Java Spring Boot for global data
-                                consumption</li>
-                            <li>• Integrated GenAI and LLM capabilities into internal tools — won Snowvation Hackathon
-                            </li>
-                            <li>• Partner with cross-functional teams to design APIs and complex data flows</li>
-                            <li>• Championed AI tools, reducing manual operational hours by 40%</li>
-                            <li>• Full end-to-end ownership: design, deployment via ArgoCD, production monitoring with
-                                Datadog</li>
-                        </ul>
+                    <!-- Project 4 -->
+                    <div class="project-card" id="proj-4">
+                        <canvas class="rough-canvas" id="proj-4-canvas"></canvas>
+                        <h3 class="project-title">Java Mastery Guide</h3>
+                        <p class="project-desc">A comprehensive, interactive reference guide for Java Data Structures, Algorithms, and the Stream API. Built for developers and interview prep.</p>
+                        <div class="tag-list">
+                            <span class="tag accent">Java</span>
+                            <span class="tag secondary">HTML5</span>
+                            <span class="tag secondary">Tailwind CSS</span>
+                        </div>
+                        <a href="Jc.html" class="project-link">View Guide →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section id="education" class="py-16 md:py-24 section-fade-in">
-            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">Education</h2>
-            <div class="max-w-2xl mx-auto text-center">
-                <div class="glass-card p-8 rounded-2xl">
-                    <h3 class="text-xl font-bold text-slate-800">B.Tech in Computer Engineering</h3>
-                    <p class="text-slate-500 font-medium mt-1">Vishwakarma Institute of Technology</p>
-                    <p class="text-amber-600 font-semibold mt-2">CGPA: 8.51</p>
+        <!-- ===== SKILLS ===== -->
+        <section id="skills" class="section-fade-in">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-title">Technical Skills</span>
+                    <svg class="doodle-underline" viewBox="0 0 120 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6 Q15 2 30 7 Q45 12 60 6 Q75 0 90 6 Q105 12 118 6" fill="none" stroke="#52b788" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div id="skills-grid"></div>
+            </div>
+        </section>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section-fade-in">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-title">Work Experience</span>
+                    <svg class="doodle-underline" viewBox="0 0 120 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6 Q15 2 30 7 Q45 12 60 6 Q75 0 90 6 Q105 12 118 6" fill="none" stroke="#ffd60a" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="sketch-card" id="exp-card" style="padding:24px;">
+                            <canvas class="rough-canvas" id="exp-canvas"></canvas>
+                            <p class="timeline-date">June 2021 – Present</p>
+                            <h3 class="timeline-role">Software Developer — Fullstack</h3>
+                            <p class="timeline-company">@ Snowflake Inc.</p>
+                            <ul class="timeline-list">
+                                <li>Design and operate low-latency backend services using Java Spring Boot for global data consumption</li>
+                                <li>Integrated GenAI and LLM capabilities into internal tools — won Snowvation Hackathon</li>
+                                <li>Partner with cross-functional teams to design APIs and complex data flows</li>
+                                <li>Championed AI tools, reducing manual operational hours by 40%</li>
+                                <li>Full end-to-end ownership: design, deployment via ArgoCD, production monitoring with Datadog</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EDUCATION ===== -->
+        <section id="education" class="section-fade-in">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <span class="section-title">Education</span>
+                    <svg class="doodle-underline" viewBox="0 0 120 12" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 6 Q15 2 30 7 Q45 12 60 6 Q75 0 90 6 Q105 12 118 6" fill="none" stroke="#7b2d8b" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="edu-card" id="edu-card">
+                    <canvas class="rough-canvas" id="edu-canvas"></canvas>
+                    <div class="edu-degree">B.Tech in Computer Engineering 🎓</div>
+                    <p class="edu-school">Vishwakarma Institute of Technology</p>
+                    <p class="edu-cgpa">CGPA: 8.51 ✨</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-20 bg-slate-950/50 border-t border-white/5 backdrop-blur-sm">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4 text-white">Let's Connect</h2>
-            <p class="mb-8 text-lg max-w-xl mx-auto">I'm currently open to new opportunities. If you have a project in
-                mind or just want to say hello, feel free to reach out.</p>
-            <a href="mailto:manas.mahajan99@gmail.com"
-                class="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-glow mb-8">
-                Say Hello
-            </a>
-            <div class="flex justify-center items-center space-x-6 text-lg">
-                <a href="https://www.linkedin.com/in/manasmahajan99/" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-amber-400 transition-colors">LinkedIn</a>
-                <span>&bull;</span>
-                <a href="https://github.com/7heWorrior" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-amber-400 transition-colors">GitHub</a>
-            </div>
+    <!-- ===== FOOTER / CONTACT ===== -->
+    <footer id="contact">
+        <h2>Let's Connect! ✉️</h2>
+        <p>I'm currently open to new opportunities. If you have a project in mind or just want to say hello, feel free to reach out.</p>
+        <a href="mailto:manas.mahajan99@gmail.com" class="btn-sketch" id="email-btn" style="color:var(--ink);background:var(--marker-yellow);padding:12px 32px;display:inline-block;font-size:1.25rem;">
+            <canvas id="email-btn-canvas"></canvas>
+            Say Hello 👋
+        </a>
+        <div class="contact-links">
+            <a href="https://www.linkedin.com/in/manasmahajan99/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <span>•</span>
+            <a href="https://github.com/7heWorrior" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
+        <p class="footer-copyright">© 2026 Manas Mahajan. Drawn with ❤️ and caffeine.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Dynamic Skills Grid
-            const skillsData = {
-                "Languages": ["Java", "Python", "SQL", "JavaScript", "Kotlin/Scala"],
-                "Frameworks": ["Spring Boot", "React", "Next.js", "Redux", "Streamlit"],
-                "Cloud & Infra": ["Kubernetes (K8s)", "Docker", "AWS (Lambda, EKS, ECR)", "Snowpark"],
-                "DevOps & Tools": ["Jenkins", "ArgoCD", "Datadog", "Snyk", "Opensearch"],
-                "Concepts": ["REST APIs", "Microservices", "A/B Testing", "CI/CD", "Agile", "Webhooks"]
-            };
-
-            const skillsContainer = document.getElementById('skills-grid');
-            for (const category in skillsData) {
-                const categoryEl = document.createElement('div');
-                categoryEl.className = 'mb-8';
-                let skillsHtml = `<h3 class="text-xl font-bold text-center mb-4 text-slate-700">${category}</h3><div class="flex flex-wrap justify-center gap-3">`;
-                skillsData[category].forEach(skill => {
-                    skillsHtml += `<div class="glass-card py-2 px-4 rounded-lg text-sm">${skill}</div>`;
-                });
-                skillsHtml += `</div>`;
-                categoryEl.innerHTML = skillsHtml;
-                skillsContainer.appendChild(categoryEl);
-            }
-
-            // Active Nav Link Styling on Scroll
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const observerOptions = { rootMargin: "-40% 0px -60% 0px" };
-
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => sectionObserver.observe(section));
-
-            // Fade-in animation on scroll
-            const fadeElements = document.querySelectorAll('.section-fade-in');
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            fadeElements.forEach(el => fadeObserver.observe(el));
-
-            // Close mobile menu on link click
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
+    // ===== ROUGH.JS BORDERS =====
+    function drawRoughBorder(canvasEl, containerEl, color, strokeWidth) {
+        if (!canvasEl || !containerEl) return;
+        const w = containerEl.offsetWidth;
+        const h = containerEl.offsetHeight;
+        if (w === 0 || h === 0) return;
+        canvasEl.width = w;
+        canvasEl.height = h;
+        const ctx = canvasEl.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+        const rc = rough.canvas(canvasEl);
+        rc.rectangle(4, 4, w - 8, h - 8, {
+            stroke: color || '#1a1209',
+            strokeWidth: strokeWidth || 2,
+            roughness: 2.2,
+            bowing: 1.5,
+            fill: 'transparent',
+            fillStyle: 'solid'
         });
-    </script>
-</body>
+    }
 
+    function drawRoughBtn(canvasEl, containerEl, fillColor, strokeColor) {
+        if (!canvasEl || !containerEl) return;
+        const w = containerEl.offsetWidth;
+        const h = containerEl.offsetHeight;
+        if (w === 0 || h === 0) return;
+        canvasEl.width = w;
+        canvasEl.height = h;
+        const ctx = canvasEl.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+        const rc = rough.canvas(canvasEl);
+        rc.rectangle(2, 2, w - 4, h - 4, {
+            stroke: strokeColor || '#1a1209',
+            strokeWidth: 2.5,
+            roughness: 2.8,
+            bowing: 2,
+            fill: 'transparent',
+            fillStyle: 'solid'
+        });
+    }
+
+    function drawSkillPill(canvasEl, containerEl) {
+        if (!canvasEl || !containerEl) return;
+        const w = containerEl.offsetWidth;
+        const h = containerEl.offsetHeight;
+        if (w === 0 || h === 0) return;
+        canvasEl.width = w;
+        canvasEl.height = h;
+        const ctx = canvasEl.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+        const rc = rough.canvas(canvasEl);
+        rc.rectangle(2, 2, w - 4, h - 4, {
+            stroke: '#6b5c45',
+            strokeWidth: 1.6,
+            roughness: 2.5,
+            bowing: 1.2,
+            fill: 'transparent',
+            fillStyle: 'solid'
+        });
+    }
+
+    // ===== SKILLS DATA =====
+    const skillsData = {
+        "Languages 💬": ["Java", "Python", "SQL", "JavaScript", "Kotlin/Scala"],
+        "Frameworks 🛠️": ["Spring Boot", "React", "Next.js", "Redux", "Streamlit"],
+        "Cloud & Infra ☁️": ["Kubernetes (K8s)", "Docker", "AWS (Lambda, EKS, ECR)", "Snowpark"],
+        "DevOps & Tools 🔧": ["Jenkins", "ArgoCD", "Datadog", "Snyk", "Opensearch"],
+        "Concepts 💡": ["REST APIs", "Microservices", "A/B Testing", "CI/CD", "Agile", "Webhooks"]
+    };
+
+    const skillsContainer = document.getElementById('skills-grid');
+    const skillPillEls = [];
+
+    for (const category in skillsData) {
+        const catEl = document.createElement('div');
+        catEl.className = 'skill-category';
+        let html = `<div class="skill-category-title">${category}</div><div class="skills-flex">`;
+        skillsData[category].forEach((skill, i) => {
+            const id = `sp-${category.replace(/[^a-z0-9]/gi,'')}-${i}`;
+            html += `<span class="skill-pill" id="${id}"><canvas id="${id}-c"></canvas>${skill}</span>`;
+            skillPillEls.push(id);
+        });
+        html += `</div>`;
+        catEl.innerHTML = html;
+        skillsContainer.appendChild(catEl);
+    }
+
+    // ===== DRAW EVERYTHING AFTER LOAD =====
+    function initRough() {
+        // About card
+        const aboutCard = document.getElementById('about-card');
+        drawRoughBorder(document.getElementById('about-canvas'), aboutCard, '#1a1209', 2.2);
+
+        // Project cards
+        ['proj-1','proj-2','proj-3','proj-4'].forEach((id, i) => {
+            const colors = ['#e63946','#0096c7','#52b788','#7b2d8b'];
+            drawRoughBorder(document.getElementById(`${id}-canvas`), document.getElementById(id), colors[i], 2);
+        });
+
+        // Experience card
+        const expCard = document.getElementById('exp-card');
+        drawRoughBorder(document.getElementById('exp-canvas'), expCard, '#ffd60a', 2.5);
+
+        // Education card
+        const eduCard = document.getElementById('edu-card');
+        drawRoughBorder(document.getElementById('edu-canvas'), eduCard, '#7b2d8b', 2.5);
+
+        // Skill pills
+        skillPillEls.forEach(id => {
+            const el = document.getElementById(id);
+            const cv = document.getElementById(`${id}-c`);
+            if (el && cv) drawSkillPill(cv, el);
+        });
+
+        // CTA Button
+        const ctaBtn = document.getElementById('hero-cta');
+        drawRoughBtn(document.getElementById('btn-cta-canvas'), ctaBtn, 'rgba(255,214,10,0.15)', '#1a1209');
+
+        // Email Button
+        const emailBtn = document.getElementById('email-btn');
+        drawRoughBtn(document.getElementById('email-btn-canvas'), emailBtn, 'transparent', '#1a1209');
+    }
+
+    window.addEventListener('load', initRough);
+
+    // Redraw on resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initRough, 200);
+    });
+
+    // ===== MOBILE MENU =====
+    const mobileMenuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        mobileMenuBtn.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+    });
+
+    document.querySelectorAll('#mobile-menu a').forEach(a => {
+        a.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            mobileMenuBtn.textContent = '☰';
+        });
+    });
+
+    // ===== ACTIVE NAV LINK =====
+    const sections = document.querySelectorAll('section, footer');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { rootMargin: '-40% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // ===== FADE IN =====
+    const fadeEls = document.querySelectorAll('.section-fade-in');
+    const fadeObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.08 });
+
+    fadeEls.forEach(el => fadeObs.observe(el));
+    </script>
+
+</body>
 </html>
